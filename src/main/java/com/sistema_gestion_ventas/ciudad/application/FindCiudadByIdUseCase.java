@@ -1,18 +1,17 @@
 package com.sistema_gestion_ventas.ciudad.application;
 
 import java.util.Optional;
-
 import com.sistema_gestion_ventas.ciudad.domain.entity.Ciudad;
-import com.sistema_gestion_ventas.ciudad.domain.service.CuidadService;
+import com.sistema_gestion_ventas.ciudad.domain.service.CiudadService;
 
 public class FindCiudadByIdUseCase {
-    private final CuidadService cuidadService;
+    private final CiudadService ciudadService;
 
-    public FindCiudadByIdUseCase(CuidadService cuidadService) {
-        this.cuidadService = cuidadService;
+    public FindCiudadByIdUseCase(CiudadService ciudadService) {
+        this.ciudadService = ciudadService;
     }
 
-    public Optional<Ciudad> execute(int ciudadid) {
-        return cuidadService.findCiudadById(ciudadid);
+    public Optional<Ciudad> execute(String ciudadId) {
+        return ciudadService.findCiudadById(ciudadId);
     }
 }

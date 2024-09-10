@@ -1,25 +1,24 @@
 package com.sistema_gestion_ventas.ciudad.domain.entity;
 
 public class Ciudad {
-    private int ciudadid;
+    private int ciudadId;
     private String nombre;
-    private int paisid;
-    
-    public Ciudad() {
-    }
+    private int paisId;
 
-    public Ciudad(int ciudadid, String nombre, int paisid) {
-        this.ciudadid = ciudadid;
+    public Ciudad() {}
+
+    public Ciudad(int ciudadId, String nombre, int paisId) {
+        this.ciudadId = ciudadId;
         this.nombre = nombre;
-        this.paisid = paisid;
+        this.paisId = paisId;
     }
 
-    public int getCiudadid() {
-        return ciudadid;
+    public int getCiudadId() {
+        return ciudadId;
     }
 
-    public void setCiudadid(int ciudadid) {
-        this.ciudadid = ciudadid;
+    public void setCiudadId(int ciudadId) {
+        this.ciudadId = ciudadId;
     }
 
     public String getNombre() {
@@ -30,17 +29,16 @@ public class Ciudad {
         this.nombre = nombre;
     }
 
-    public int getPaisid() {
-        return paisid;
+    public int getPaisId() {
+        return paisId;
     }
 
-    public void setPaisid(int paisid) {
-        this.paisid = paisid;
+    public void setPaisId(int paisId) {
+        this.paisId = paisId;
     }
 
     @Override
     public String toString() {
-        return "Ciudad [ciudadid=" + ciudadid + ", nombre=" + nombre + ", paisid=" + paisid + "]";
+        return "Ciudad {ciudadId=" + ciudadId + ", nombre=" + nombre + ", paisId=" + paisId + "}";
     }
-    
 }

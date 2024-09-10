@@ -1,23 +1,22 @@
 package com.sistema_gestion_ventas.pais.domain.entity;
 
 public class Pais {
-    private int paisid;
+    private int paisId;
     private String nombre;
-    
-    public Pais() {
-    }
 
-    public Pais(int paisid, String nombre) {
-        this.paisid = paisid;
+    public Pais() {}
+
+    public Pais(int paisId, String nombre) {
+        this.paisId = paisId;
         this.nombre = nombre;
     }
 
-    public int getPaisid() {
-        return paisid;
+    public int getPaisId() {
+        return paisId;
     }
 
-    public void setPaisid(int paisid) {
-        this.paisid = paisid;
+    public void setPaisId(int paisId) {
+        this.paisId = paisId;
     }
 
     public String getNombre() {
@@ -30,7 +29,6 @@ public class Pais {
 
     @Override
     public String toString() {
-        return "Pais [paisid=" + paisid + ", nombre=" + nombre + "]";
+        return "Pais {paisId=" + paisId + ", nombre=" + nombre + "}";
     }
-    
 }

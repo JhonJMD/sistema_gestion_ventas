@@ -1,7 +1,6 @@
 package com.sistema_gestion_ventas.pais.application;
 
 import java.util.List;
-
 import com.sistema_gestion_ventas.pais.domain.entity.Pais;
 import com.sistema_gestion_ventas.pais.domain.service.PaisService;
 
@@ -14,5 +13,5 @@ public class GetAllPaisUseCase {
 
     public List<Pais> execute() {
         return paisService.getAllPais();
-    }   
+    }
 }

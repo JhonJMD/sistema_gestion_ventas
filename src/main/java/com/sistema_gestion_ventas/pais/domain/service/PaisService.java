@@ -6,9 +6,9 @@ import java.util.Optional;
 import com.sistema_gestion_ventas.pais.domain.entity.Pais;
 
 public interface PaisService {
-    void createPais (Pais pais);
-    Optional<Pais> findPais (int paisid);
-    void updatePais (Pais pais);
-    void deletePais (int paisid);
+    void createPais(Pais pais);
+    void updatePais(Pais pais);
+    void deletePais(String paisId);
+    Optional<Pais> findPaisById(String paisId);
     List<Pais> getAllPais();
 }

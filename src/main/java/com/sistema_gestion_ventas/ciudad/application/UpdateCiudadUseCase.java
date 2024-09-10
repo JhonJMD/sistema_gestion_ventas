@@ -1,16 +1,16 @@
 package com.sistema_gestion_ventas.ciudad.application;
 
 import com.sistema_gestion_ventas.ciudad.domain.entity.Ciudad;
-import com.sistema_gestion_ventas.ciudad.domain.service.CuidadService;
+import com.sistema_gestion_ventas.ciudad.domain.service.CiudadService;
 
 public class UpdateCiudadUseCase {
-    private final CuidadService cuidadService;
+    private final CiudadService ciudadService;
 
-    public UpdateCiudadUseCase(CuidadService cuidadService) {
-        this.cuidadService = cuidadService;
+    public UpdateCiudadUseCase(CiudadService ciudadService) {
+        this.ciudadService = ciudadService;
     }
 
     public void execute(Ciudad ciudad) {
-        cuidadService.updateCiudad(ciudad);
+        ciudadService.updateCiudad(ciudad);
     }
 }

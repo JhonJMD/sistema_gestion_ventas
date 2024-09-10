@@ -10,7 +10,7 @@ public class CreatePaisUseCase {
         this.paisService = paisService;
     }
 
-    public void execute(Pais pais){
+    public void execute(Pais pais) {
         paisService.createPais(pais);
     }
 }
