@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.producto.domain.entity;
 
-import java.util.Date;
-
 public class Producto {
     private int productoId;
     private String codigoBarras;

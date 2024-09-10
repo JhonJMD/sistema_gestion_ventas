@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.tipo_documento.domain.entity;
 
-import java.util.Date;
-
 public class TipoDocumento {
     private int tipoDocumentoId;
     private String nombre;

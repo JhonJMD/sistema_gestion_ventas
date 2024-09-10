@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.empresa.domain.entity;
 
-import java.util.Date;
-
 public class Empresa {
     private int empresaId;
     private String nombre;

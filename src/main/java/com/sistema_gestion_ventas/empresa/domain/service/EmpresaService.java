@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.empresa.domain.entity.Empresa;
 public interface EmpresaService {
     void createEmpresa(Empresa empresa);
     void updateEmpresa(Empresa empresa);
-    void deleteEmpresa(String empresaId);
-    Optional<Empresa> findEmpresaById(String empresaId);
+    void deleteEmpresa(int empresaId);
+    Optional<Empresa> findEmpresaById(int empresaId);
     List<Empresa> getAllEmpresa();
 }

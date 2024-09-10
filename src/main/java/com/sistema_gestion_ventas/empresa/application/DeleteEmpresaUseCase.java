@@ -9,7 +9,7 @@ public class DeleteEmpresaUseCase {
         this.empresaService = empresaService;
     }
 
-    public void execute(String empresaId) {
+    public void execute(int empresaId) {
         empresaService.deleteEmpresa(empresaId);
     }
 }

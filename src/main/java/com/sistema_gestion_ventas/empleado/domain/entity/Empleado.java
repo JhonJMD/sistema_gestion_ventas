@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.empleado.domain.entity;
 
-import java.util.Date;
-
 public class Empleado {
     private String empleadoId;
     private int tipoDocumento;

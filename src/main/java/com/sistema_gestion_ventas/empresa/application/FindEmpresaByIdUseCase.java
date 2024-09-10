@@ -11,7 +11,7 @@ public class FindEmpresaByIdUseCase {
         this.empresaService = empresaService;
     }
 
-    public Optional<Empresa> execute(String empresaId) {
+    public Optional<Empresa> execute(int empresaId) {
         return empresaService.findEmpresaById(empresaId);
     }
 }

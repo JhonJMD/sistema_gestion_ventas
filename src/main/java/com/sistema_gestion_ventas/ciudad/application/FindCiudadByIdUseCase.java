@@ -11,7 +11,7 @@ public class FindCiudadByIdUseCase {
         this.ciudadService = ciudadService;
     }
 
-    public Optional<Ciudad> execute(String ciudadId) {
+    public Optional<Ciudad> execute(int ciudadId) {
         return ciudadService.findCiudadById(ciudadId);
     }
 }

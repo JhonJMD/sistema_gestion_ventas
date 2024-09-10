@@ -9,7 +9,7 @@ public class DeleteDireccionUseCase {
         this.direccionService = direccionService;
     }
 
-    public void execute(String direccionId) {
+    public void execute(int direccionId) {
         direccionService.deleteDireccion(direccionId);
     }
 }

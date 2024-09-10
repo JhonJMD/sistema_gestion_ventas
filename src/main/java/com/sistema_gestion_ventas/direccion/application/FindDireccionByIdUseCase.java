@@ -11,7 +11,7 @@ public class FindDireccionByIdUseCase {
         this.direccionService = direccionService;
     }
 
-    public Optional<Direccion> execute(String direccionId) {
+    public Optional<Direccion> execute(int direccionId) {
         return direccionService.findDireccionById(direccionId);
     }
 }

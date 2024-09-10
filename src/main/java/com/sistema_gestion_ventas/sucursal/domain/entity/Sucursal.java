@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.sucursal.domain.entity;
 
-import java.util.Date;
-
 public class Sucursal {
     private int sucursalId;
     private int direccionId;

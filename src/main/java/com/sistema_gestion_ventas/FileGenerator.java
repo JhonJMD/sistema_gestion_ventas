@@ -442,16 +442,14 @@ public class FileGenerator {
     public static void main(String[] args) {
         try {
             List<Map<String, String>> attributes = List.of(
+                    Map.of("name", "detallePedidoId", "type", "int"),
                     Map.of("name", "pedidoId", "type", "int"),
-                    Map.of("name", "tipoPedidoId", "type", "int"),
-                    Map.of("name", "clienteId", "type", "String"),
-                    Map.of("name", "fechaPedido", "type", "Date"),
-                    Map.of("name", "estadoId", "type", "int"),
-                    Map.of("name", "totalEstimado", "type", "double"),
-                    Map.of("name", "fechaConfirmacion", "type", "Date"),
-                    Map.of("name", "usuarioId", "type", "int")
+                    Map.of("name", "productoId", "type", "int"),
+                    Map.of("name", "cantidad", "type", "int"),
+                    Map.of("name", "precioUnitario", "type", "double"),
+                    Map.of("name", "subTotal", "type", "double")
             );
-            generateFilesForEntity("Pedido", "pedido", attributes);
+            generateFilesForEntity("DetallePedido", "detallePedido", attributes);
         } catch (IOException e) {
             e.printStackTrace();
         }

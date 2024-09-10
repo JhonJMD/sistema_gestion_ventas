@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.inventario.domain.entity;
 
-import java.util.Date;
-
 public class Inventario {
     private int productoId;
     private int sucursalId;

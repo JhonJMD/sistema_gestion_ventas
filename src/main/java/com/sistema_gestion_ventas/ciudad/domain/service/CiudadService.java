@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.ciudad.domain.entity.Ciudad;
 public interface CiudadService {
     void createCiudad(Ciudad ciudad);
     void updateCiudad(Ciudad ciudad);
-    void deleteCiudad(String ciudadId);
-    Optional<Ciudad> findCiudadById(String ciudadId);
+    void deleteCiudad(int ciudadId);
+    Optional<Ciudad> findCiudadById(int ciudadId);
     List<Ciudad> getAllCiudad();
 }

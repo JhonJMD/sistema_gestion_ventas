@@ -1,7 +1,5 @@
 package com.sistema_gestion_ventas.cliente.domain.entity;
 
-import java.util.Date;
-
 public class Cliente {
     private int clienteId;
     private int tipoDocumentoId;

@@ -56,10 +56,10 @@ public class CiudadRepository implements CiudadService {
     }
 
     @Override
-    public void deleteCiudad(String ciudadId) {
+    public void deleteCiudad(int ciudadId) {
         String query = "DELETE FROM ciudad WHERE ciudadId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, ciudadId);
+            ps.setInt(1, ciudadId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class CiudadRepository implements CiudadService {
     }
 
     @Override
-    public Optional<Ciudad> findCiudadById(String ciudadId) {
+    public Optional<Ciudad> findCiudadById(int ciudadId) {
         String query = "SELECT * FROM ciudad WHERE ciudadId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, ciudadId);
+            ps.setInt(1, ciudadId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Ciudad ciudad = new Ciudad();

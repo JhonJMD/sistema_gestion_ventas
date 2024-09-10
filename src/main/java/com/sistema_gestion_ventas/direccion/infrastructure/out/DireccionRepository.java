@@ -56,10 +56,10 @@ public class DireccionRepository implements DireccionService {
     }
 
     @Override
-    public void deleteDireccion(String direccionId) {
+    public void deleteDireccion(int direccionId) {
         String query = "DELETE FROM direccion WHERE direccionId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, direccionId);
+            ps.setInt(1, direccionId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class DireccionRepository implements DireccionService {
     }
 
     @Override
-    public Optional<Direccion> findDireccionById(String direccionId) {
+    public Optional<Direccion> findDireccionById(int direccionId) {
         String query = "SELECT * FROM direccion WHERE direccionId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, direccionId);
+            ps.setInt(1, direccionId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Direccion direccion = new Direccion();
@@ -91,7 +91,7 @@ public class DireccionRepository implements DireccionService {
         List<Direccion> direccionList = new ArrayList<>();
         String query = "SELECT * FROM direccion";
         try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Direccion direccion = new Direccion();
                 direccion.setDireccionId(rs.getInt("direccionId"));

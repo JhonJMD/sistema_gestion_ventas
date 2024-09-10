@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,10 +58,10 @@ public class EmpresaRepository implements EmpresaService {
     }
 
     @Override
-    public void deleteEmpresa(String empresaId) {
+    public void deleteEmpresa(int empresaId) {
         String query = "DELETE FROM empresa WHERE empresaId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, empresaId);
+            ps.setInt(1, empresaId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,10 +69,10 @@ public class EmpresaRepository implements EmpresaService {
     }
 
     @Override
-    public Optional<Empresa> findEmpresaById(String empresaId) {
+    public Optional<Empresa> findEmpresaById(int empresaId) {
         String query = "SELECT * FROM empresa WHERE empresaId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, empresaId);
+            ps.setInt(1, empresaId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Empresa empresa = new Empresa();
@@ -95,7 +94,7 @@ public class EmpresaRepository implements EmpresaService {
         List<Empresa> empresaList = new ArrayList<>();
         String query = "SELECT * FROM empresa";
         try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Empresa empresa = new Empresa();
                 empresa.setEmpresaId(rs.getInt("empresaId"));
