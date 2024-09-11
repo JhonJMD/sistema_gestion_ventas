@@ -9,7 +9,7 @@ public class DeleteTelefonoUseCase {
         this.telefonoService = telefonoService;
     }
 
-    public void execute(String telefonoId) {
+    public void execute(int telefonoId) {
         telefonoService.deleteTelefono(telefonoId);
     }
 }

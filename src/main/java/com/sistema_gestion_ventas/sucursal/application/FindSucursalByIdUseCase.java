@@ -11,7 +11,7 @@ public class FindSucursalByIdUseCase {
         this.sucursalService = sucursalService;
     }
 
-    public Optional<Sucursal> execute(String sucursalId) {
+    public Optional<Sucursal> execute(int sucursalId) {
         return sucursalService.findSucursalById(sucursalId);
     }
 }

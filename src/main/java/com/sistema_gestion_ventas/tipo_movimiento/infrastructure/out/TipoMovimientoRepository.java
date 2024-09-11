@@ -54,10 +54,10 @@ public class TipoMovimientoRepository implements TipoMovimientoService {
     }
 
     @Override
-    public void deleteTipoMovimiento(String tipomovimientoId) {
+    public void deleteTipoMovimiento(int tipoMovimientoId) {
         String query = "DELETE FROM tipomovimiento WHERE tipoMovimientoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipomovimientoId);
+            ps.setInt(1, tipoMovimientoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class TipoMovimientoRepository implements TipoMovimientoService {
     }
 
     @Override
-    public Optional<TipoMovimiento> findTipoMovimientoById(String tipomovimientoId) {
+    public Optional<TipoMovimiento> findTipoMovimientoById(int tipoMovimientoId) {
         String query = "SELECT * FROM tipomovimiento WHERE tipoMovimientoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipomovimientoId);
+            ps.setInt(1, tipoMovimientoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     TipoMovimiento tipomovimiento = new TipoMovimiento();

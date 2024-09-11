@@ -9,7 +9,7 @@ public class DeletePaisUseCase {
         this.paisService = paisService;
     }
 
-    public void execute(String paisId) {
+    public void execute(int paisId) {
         paisService.deletePais(paisId);
     }
 }

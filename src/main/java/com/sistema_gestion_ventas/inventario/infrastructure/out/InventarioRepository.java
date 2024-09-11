@@ -56,10 +56,10 @@ public class InventarioRepository implements InventarioService {
     }
 
     @Override
-    public void deleteInventario(String inventarioId) {
+    public void deleteInventario(int inventarioId) {
         String query = "DELETE FROM inventario WHERE productoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, inventarioId);
+            ps.setInt(1, inventarioId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class InventarioRepository implements InventarioService {
     }
 
     @Override
-    public Optional<Inventario> findInventarioById(String inventarioId) {
+    public Optional<Inventario> findInventarioById(int inventarioId) {
         String query = "SELECT * FROM inventario WHERE productoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, inventarioId);
+            ps.setInt(1, inventarioId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Inventario inventario = new Inventario();

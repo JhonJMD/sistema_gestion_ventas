@@ -148,7 +148,7 @@ CREATE TABLE cliente (
 
 -- Tabla Empleado
 CREATE TABLE empleado (
-    empleadoId INT AUTO_INCREMENT,
+    empleadoId VARCHAR(30),
     tipoDocumentoId INT,
     nombre VARCHAR(30),
     apellido VARCHAR(30),
@@ -164,7 +164,7 @@ CREATE TABLE empleado (
 -- Tabla Usuario (para empleados y administradores)
 CREATE TABLE usuario (
     usuarioId INT AUTO_INCREMENT,
-    empleadoId INT,
+    empleadoId VARCHAR(30),
     username VARCHAR(50) UNIQUE,
     passwordHash VARCHAR(255),
     rol ENUM('ADMIN_GENERAL', 'ADMIN_SUCURSAL', 'EMPLEADO'),
@@ -218,10 +218,19 @@ CREATE TABLE detallePedido (
 CREATE TABLE proveedorProducto (
     proveedorId VARCHAR(30),
     productoId INT,
+    precioCompra DECIMAL(16,2), 
+    tiempoEntrega INT, 
+    cantidadMinimaPedido INT,
+    descuentoVolumen DECIMAL(5,2),
+    moneda VARCHAR(10), 
+    condicionesPago VARCHAR(50), 
+    fechaUltimaCompra DATE, 
+    calificacionProveedor DECIMAL(3,2), 
     CONSTRAINT pk_proveedor_producto PRIMARY KEY (proveedorId, productoId),
     CONSTRAINT fk_proveedor_producto_proveedor FOREIGN KEY (proveedorId) REFERENCES proveedor(proveedorId),
     CONSTRAINT fk_proveedor_producto_producto FOREIGN KEY (productoId) REFERENCES producto(productoId)
 );
+
 
 -- Tabla Inventario
 CREATE TABLE inventario (
@@ -240,7 +249,7 @@ CREATE TABLE compra (
     fechaCompra DATE,
     estadoId INT,
     totalSinDescuento DECIMAL(10,2),
-    empleadoId INT,
+    empleadoId VARCHAR(30),
     CONSTRAINT pk_id_compra PRIMARY KEY (compraId),
     CONSTRAINT fk_id_pedido_compra FOREIGN KEY (pedidoId) REFERENCES pedido(pedidoId),
     CONSTRAINT fk_id_estado_compra FOREIGN KEY (estadoId) REFERENCES estado(estadoId),
@@ -268,7 +277,7 @@ CREATE TABLE venta (
     totalSinDescuento DECIMAL(16,2),
     clienteId VARCHAR(30),
     estadoId INT,
-    empleadoId INT,
+    empleadoId VARCHAR(30),
     CONSTRAINT pk_id_venta PRIMARY KEY (ventaId),
     CONSTRAINT fk_id_pedido_venta FOREIGN KEY (pedidoId) REFERENCES pedido(pedidoId),
     CONSTRAINT fk_id_cliente_venta FOREIGN KEY (clienteId) REFERENCES cliente(clienteId),

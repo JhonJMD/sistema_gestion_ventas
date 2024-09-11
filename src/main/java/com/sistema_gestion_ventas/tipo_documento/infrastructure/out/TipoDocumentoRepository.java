@@ -54,10 +54,10 @@ public class TipoDocumentoRepository implements TipoDocumentoService {
     }
 
     @Override
-    public void deleteTipoDocumento(String tipodocumentoId) {
+    public void deleteTipoDocumento(int tipoDocumentoId) {
         String query = "DELETE FROM tipodocumento WHERE tipoDocumentoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipodocumentoId);
+            ps.setInt(1, tipoDocumentoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class TipoDocumentoRepository implements TipoDocumentoService {
     }
 
     @Override
-    public Optional<TipoDocumento> findTipoDocumentoById(String tipodocumentoId) {
+    public Optional<TipoDocumento> findTipoDocumentoById(int tipoDocumentoId) {
         String query = "SELECT * FROM tipodocumento WHERE tipoDocumentoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipodocumentoId);
+            ps.setInt(1, tipoDocumentoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     TipoDocumento tipodocumento = new TipoDocumento();

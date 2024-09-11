@@ -9,7 +9,7 @@ public class DeleteTipoPedidoUseCase {
         this.tipopedidoService = tipopedidoService;
     }
 
-    public void execute(String tipopedidoId) {
-        tipopedidoService.deleteTipoPedido(tipopedidoId);
+    public void execute(int tipoPedidoId) {
+        tipopedidoService.deleteTipoPedido(tipoPedidoId);
     }
 }

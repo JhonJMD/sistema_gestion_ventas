@@ -62,10 +62,10 @@ public class ProductoRepository implements ProductoService {
     }
 
     @Override
-    public void deleteProducto(String productoId) {
+    public void deleteProducto(int productoId) {
         String query = "DELETE FROM producto WHERE productoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, productoId);
+            ps.setInt(1, productoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,10 +73,10 @@ public class ProductoRepository implements ProductoService {
     }
 
     @Override
-    public Optional<Producto> findProductoById(String productoId) {
+    public Optional<Producto> findProductoById(int productoId) {
         String query = "SELECT * FROM producto WHERE productoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, productoId);
+            ps.setInt(1, productoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Producto producto = new Producto();
@@ -100,7 +100,7 @@ public class ProductoRepository implements ProductoService {
         List<Producto> productoList = new ArrayList<>();
         String query = "SELECT * FROM producto";
         try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Producto producto = new Producto();
                 producto.setProductoId(rs.getInt("productoId"));

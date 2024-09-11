@@ -9,7 +9,7 @@ public class DeleteMetodoPagoUseCase {
         this.metodopagoService = metodopagoService;
     }
 
-    public void execute(String metodopagoId) {
-        metodopagoService.deleteMetodoPago(metodopagoId);
+    public void execute(int metodoPagoId) {
+        metodopagoService.deleteMetodoPago(metodoPagoId);
     }
 }

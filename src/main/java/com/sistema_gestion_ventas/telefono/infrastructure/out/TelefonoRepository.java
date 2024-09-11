@@ -56,10 +56,10 @@ public class TelefonoRepository implements TelefonoService {
     }
 
     @Override
-    public void deleteTelefono(String telefonoId) {
+    public void deleteTelefono(int telefonoId) {
         String query = "DELETE FROM telefono WHERE telefonoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, telefonoId);
+            ps.setInt(1, telefonoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class TelefonoRepository implements TelefonoService {
     }
 
     @Override
-    public Optional<Telefono> findTelefonoById(String telefonoId) {
+    public Optional<Telefono> findTelefonoById(int telefonoId) {
         String query = "SELECT * FROM telefono WHERE telefonoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, telefonoId);
+            ps.setInt(1, telefonoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Telefono telefono = new Telefono();

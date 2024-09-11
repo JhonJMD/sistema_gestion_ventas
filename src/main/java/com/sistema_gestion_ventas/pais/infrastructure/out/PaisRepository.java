@@ -54,10 +54,10 @@ public class PaisRepository implements PaisService {
     }
 
     @Override
-    public void deletePais(String paisId) {
+    public void deletePais(int paisId) {
         String query = "DELETE FROM pais WHERE paisId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, paisId);
+            ps.setInt(1, paisId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class PaisRepository implements PaisService {
     }
 
     @Override
-    public Optional<Pais> findPaisById(String paisId) {
+    public Optional<Pais> findPaisById(int paisId) {
         String query = "SELECT * FROM pais WHERE paisId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, paisId);
+            ps.setInt(1, paisId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Pais pais = new Pais();

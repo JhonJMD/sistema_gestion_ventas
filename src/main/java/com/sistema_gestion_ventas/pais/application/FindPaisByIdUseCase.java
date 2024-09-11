@@ -11,7 +11,7 @@ public class FindPaisByIdUseCase {
         this.paisService = paisService;
     }
 
-    public Optional<Pais> execute(String paisId) {
+    public Optional<Pais> execute(int paisId) {
         return paisService.findPaisById(paisId);
     }
 }

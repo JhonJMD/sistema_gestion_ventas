@@ -62,10 +62,10 @@ public class DetalleCompraRepository implements DetalleCompraService {
     }
 
     @Override
-    public void deleteDetalleCompra(int detallecompraId) {
+    public void deleteDetalleCompra(int detalleCompraId) {
         String query = "DELETE FROM detallecompra WHERE detalleCompraId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, detallecompraId);
+            ps.setInt(1, detalleCompraId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,10 +73,10 @@ public class DetalleCompraRepository implements DetalleCompraService {
     }
 
     @Override
-    public Optional<DetalleCompra> findDetalleCompraById(int detallecompraId) {
+    public Optional<DetalleCompra> findDetalleCompraById(int detalleCompraId) {
         String query = "SELECT * FROM detallecompra WHERE detalleCompraId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, detallecompraId);
+            ps.setInt(1, detalleCompraId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     DetalleCompra detallecompra = new DetalleCompra();

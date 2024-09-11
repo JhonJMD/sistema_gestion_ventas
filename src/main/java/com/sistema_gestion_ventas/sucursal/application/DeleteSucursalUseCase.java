@@ -9,7 +9,7 @@ public class DeleteSucursalUseCase {
         this.sucursalService = sucursalService;
     }
 
-    public void execute(String sucursalId) {
+    public void execute(int sucursalId) {
         sucursalService.deleteSucursal(sucursalId);
     }
 }

@@ -56,10 +56,10 @@ public class SucursalRepository implements SucursalService {
     }
 
     @Override
-    public void deleteSucursal(String sucursalId) {
+    public void deleteSucursal(int sucursalId) {
         String query = "DELETE FROM sucursal WHERE sucursalId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, sucursalId);
+            ps.setInt(1, sucursalId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class SucursalRepository implements SucursalService {
     }
 
     @Override
-    public Optional<Sucursal> findSucursalById(String sucursalId) {
+    public Optional<Sucursal> findSucursalById(int sucursalId) {
         String query = "SELECT * FROM sucursal WHERE sucursalId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, sucursalId);
+            ps.setInt(1, sucursalId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Sucursal sucursal = new Sucursal();

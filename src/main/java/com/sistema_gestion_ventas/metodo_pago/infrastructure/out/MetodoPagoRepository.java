@@ -54,10 +54,10 @@ public class MetodoPagoRepository implements MetodoPagoService {
     }
 
     @Override
-    public void deleteMetodoPago(String metodopagoId) {
+    public void deleteMetodoPago(int metodoPagoId) {
         String query = "DELETE FROM metodopago WHERE metodoPagoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, metodopagoId);
+            ps.setInt(1, metodoPagoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class MetodoPagoRepository implements MetodoPagoService {
     }
 
     @Override
-    public Optional<MetodoPago> findMetodoPagoById(String metodopagoId) {
+    public Optional<MetodoPago> findMetodoPagoById(int metodoPagoId) {
         String query = "SELECT * FROM metodopago WHERE metodoPagoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, metodopagoId);
+            ps.setInt(1, metodoPagoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     MetodoPago metodopago = new MetodoPago();

@@ -11,7 +11,7 @@ public class FindTelefonoByIdUseCase {
         this.telefonoService = telefonoService;
     }
 
-    public Optional<Telefono> execute(String telefonoId) {
+    public Optional<Telefono> execute(int telefonoId) {
         return telefonoService.findTelefonoById(telefonoId);
     }
 }

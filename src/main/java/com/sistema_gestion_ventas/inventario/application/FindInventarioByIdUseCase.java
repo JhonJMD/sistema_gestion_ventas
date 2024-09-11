@@ -11,7 +11,7 @@ public class FindInventarioByIdUseCase {
         this.inventarioService = inventarioService;
     }
 
-    public Optional<Inventario> execute(String inventarioId) {
+    public Optional<Inventario> execute(int inventarioId) {
         return inventarioService.findInventarioById(inventarioId);
     }
 }

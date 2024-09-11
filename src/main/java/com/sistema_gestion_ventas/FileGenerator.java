@@ -17,17 +17,20 @@ public class FileGenerator {
         new File(basePath + "domain/service").mkdirs();
         new File(basePath + "infrastructure/out").mkdirs();
 
+        // Extraer el tipo de ID (primer atributo)
+        String idType = attributes.get(0).get("type");
+
         // Crear la entidad
         createEntityFile(basePath + "domain/entity/" + entityName + ".java", entityPackage, entityName, attributes);
 
         // Crear el servicio
-        createServiceFile(basePath + "domain/service/" + entityName + "Service.java", entityPackage, entityName);
+        createServiceFile(basePath + "domain/service/" + entityName + "Service.java", entityPackage, entityName, idType);
 
         // Crear los casos de uso
-        createUseCaseFiles(basePath, entityPackage, entityName);
+        createUseCaseFiles(basePath, entityPackage, entityName, idType);
 
-        // Crear el repositorio siguiendo la estructura que mencionas
-        createRepositoryFile(basePath + "infrastructure/out/" + entityName + "Repository.java", entityPackage, entityName, attributes);
+        // Crear el repositorio
+        createRepositoryFile(basePath + "infrastructure/out/" + entityName + "Repository.java", entityPackage, entityName, idType, attributes);
 
         System.out.println("Archivos para la entidad " + entityName + " creados exitosamente.");
     }
@@ -92,40 +95,40 @@ public class FileGenerator {
         writeFile(filePath, content.toString());
     }
 
-    private static void createServiceFile(String filePath, String entityPackage, String entityName) throws IOException {
+    private static void createServiceFile(String filePath, String entityPackage, String entityName, String idType) throws IOException {
         String content = "package com.sistema_gestion_ventas." + entityPackage + ".domain.service;\n\n"
                 + "import java.util.List;\n"
                 + "import java.util.Optional;\n\n"
                 + "import com.sistema_gestion_ventas." + entityPackage + ".domain.entity." + entityName + ";\n\n"
                 + "public interface " + entityName + "Service {\n"
-                + "    void create" + entityName + "(" + entityName + " " + entityName.toLowerCase() + ");\n"
-                + "    void update" + entityName + "(" + entityName + " " + entityName.toLowerCase() + ");\n"
-                + "    void delete" + entityName + "(String " + entityName.toLowerCase() + "Id);\n"
-                + "    Optional<" + entityName + "> find" + entityName + "ById(String " + entityName.toLowerCase() + "Id);\n"
+                + "    void create" + entityName + "(" + entityName + " " + entityPackage + ");\n"
+                + "    void update" + entityName + "(" + entityName + " " + entityPackage + ");\n"
+                + "    void delete" + entityName + "(" + idType + " " + entityPackage + "Id);\n"
+                + "    Optional<" + entityName + "> find" + entityName + "ById(" + idType + " " + entityPackage + "Id);\n"
                 + "    List<" + entityName + "> getAll" + entityName + "();\n"
                 + "}\n";
 
         writeFile(filePath, content);
     }
 
-    private static void createUseCaseFiles(String basePath, String entityPackage, String entityName) throws IOException {
+    private static void createUseCaseFiles(String basePath, String entityPackage, String entityName, String idType) throws IOException {
         // Crear Use Case para Create
-        createUseCaseFile(basePath + "application/Create" + entityName + "UseCase.java", entityPackage, entityName, "Create");
+        createUseCaseFile(basePath + "application/Create" + entityName + "UseCase.java", entityPackage, entityName, "Create", idType);
     
         // Crear Use Case para Delete
-        createUseCaseFile(basePath + "application/Delete" + entityName + "UseCase.java", entityPackage, entityName, "Delete");
+        createUseCaseFile(basePath + "application/Delete" + entityName + "UseCase.java", entityPackage, entityName, "Delete", idType);
     
         // Crear Use Case para Update
-        createUseCaseFile(basePath + "application/Update" + entityName + "UseCase.java", entityPackage, entityName, "Update");
+        createUseCaseFile(basePath + "application/Update" + entityName + "UseCase.java", entityPackage, entityName, "Update", idType);
     
         // Crear Use Case para FindById
-        createUseCaseFile(basePath + "application/Find" + entityName + "ByIdUseCase.java", entityPackage, entityName, "FindById");
+        createUseCaseFile(basePath + "application/Find" + entityName + "ByIdUseCase.java", entityPackage, entityName, "FindById", idType);
     
         // Crear Use Case para GetAll
-        createUseCaseFile(basePath + "application/GetAll" + entityName + "UseCase.java", entityPackage, entityName, "GetAll");
+        createUseCaseFile(basePath + "application/GetAll" + entityName + "UseCase.java", entityPackage, entityName, "GetAll", idType);
     }
     
-    private static void createUseCaseFile(String filePath, String entityPackage, String entityName, String useCase) throws IOException {
+    private static void createUseCaseFile(String filePath, String entityPackage, String entityName, String useCase, String idType) throws IOException {
         String content = "";
         switch (useCase) {
             case "Create":
@@ -133,12 +136,12 @@ public class FileGenerator {
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.entity." + entityName + ";\n"
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.service." + entityName + "Service;\n\n"
                         + "public class Create" + entityName + "UseCase {\n"
-                        + "    private final " + entityName + "Service " + entityName.toLowerCase() + "Service;\n\n"
-                        + "    public Create" + entityName + "UseCase(" + entityName + "Service " + entityName.toLowerCase() + "Service) {\n"
-                        + "        this." + entityName.toLowerCase() + "Service = " + entityName.toLowerCase() + "Service;\n"
+                        + "    private final " + entityName + "Service " + entityPackage + "Service;\n\n"
+                        + "    public Create" + entityName + "UseCase(" + entityName + "Service " + entityPackage + "Service) {\n"
+                        + "        this." + entityPackage + "Service = " + entityPackage + "Service;\n"
                         + "    }\n\n"
-                        + "    public void execute(" + entityName + " " + entityName.toLowerCase() + ") {\n"
-                        + "        " + entityName.toLowerCase() + "Service.create" + entityName + "(" + entityName.toLowerCase() + ");\n"
+                        + "    public void execute(" + entityName + " " + entityPackage + ") {\n"
+                        + "        " + entityPackage + "Service.create" + entityName + "(" + entityPackage + ");\n"
                         + "    }\n"
                         + "}\n";
                 break;
@@ -147,12 +150,12 @@ public class FileGenerator {
                 content = "package com.sistema_gestion_ventas." + entityPackage + ".application;\n\n"
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.service." + entityName + "Service;\n\n"
                         + "public class Delete" + entityName + "UseCase {\n"
-                        + "    private final " + entityName + "Service " + entityName.toLowerCase() + "Service;\n\n"
-                        + "    public Delete" + entityName + "UseCase(" + entityName + "Service " + entityName.toLowerCase() + "Service) {\n"
-                        + "        this." + entityName.toLowerCase() + "Service = " + entityName.toLowerCase() + "Service;\n"
+                        + "    private final " + entityName + "Service " + entityPackage + "Service;\n\n"
+                        + "    public Delete" + entityName + "UseCase(" + entityName + "Service " + entityPackage + "Service) {\n"
+                        + "        this." + entityPackage + "Service = " + entityPackage + "Service;\n"
                         + "    }\n\n"
-                        + "    public void execute(String " + entityName.toLowerCase() + "Id) {\n"
-                        + "        " + entityName.toLowerCase() + "Service.delete" + entityName + "(" + entityName.toLowerCase() + "Id);\n"
+                        + "    public void execute(" + idType + " " + entityPackage + "Id) {\n"
+                        + "        " + entityPackage + "Service.delete" + entityName + "(" + entityPackage + "Id);\n"
                         + "    }\n"
                         + "}\n";
                 break;
@@ -162,12 +165,12 @@ public class FileGenerator {
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.entity." + entityName + ";\n"
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.service." + entityName + "Service;\n\n"
                         + "public class Update" + entityName + "UseCase {\n"
-                        + "    private final " + entityName + "Service " + entityName.toLowerCase() + "Service;\n\n"
-                        + "    public Update" + entityName + "UseCase(" + entityName + "Service " + entityName.toLowerCase() + "Service) {\n"
-                        + "        this." + entityName.toLowerCase() + "Service = " + entityName.toLowerCase() + "Service;\n"
+                        + "    private final " + entityName + "Service " + entityPackage + "Service;\n\n"
+                        + "    public Update" + entityName + "UseCase(" + entityName + "Service " + entityPackage + "Service) {\n"
+                        + "        this." + entityPackage + "Service = " + entityPackage + "Service;\n"
                         + "    }\n\n"
-                        + "    public void execute(" + entityName + " " + entityName.toLowerCase() + ") {\n"
-                        + "        " + entityName.toLowerCase() + "Service.update" + entityName + "(" + entityName.toLowerCase() + ");\n"
+                        + "    public void execute(" + entityName + " " + entityPackage + ") {\n"
+                        + "        " + entityPackage + "Service.update" + entityName + "(" + entityPackage + ");\n"
                         + "    }\n"
                         + "}\n";
                 break;
@@ -178,12 +181,12 @@ public class FileGenerator {
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.entity." + entityName + ";\n"
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.service." + entityName + "Service;\n\n"
                         + "public class Find" + entityName + "ByIdUseCase {\n"
-                        + "    private final " + entityName + "Service " + entityName.toLowerCase() + "Service;\n\n"
-                        + "    public Find" + entityName + "ByIdUseCase(" + entityName + "Service " + entityName.toLowerCase() + "Service) {\n"
-                        + "        this." + entityName.toLowerCase() + "Service = " + entityName.toLowerCase() + "Service;\n"
+                        + "    private final " + entityName + "Service " + entityPackage + "Service;\n\n"
+                        + "    public Find" + entityName + "ByIdUseCase(" + entityName + "Service " + entityPackage + "Service) {\n"
+                        + "        this." + entityPackage + "Service = " + entityPackage + "Service;\n"
                         + "    }\n\n"
-                        + "    public Optional<" + entityName + "> execute(String " + entityName.toLowerCase() + "Id) {\n"
-                        + "        return " + entityName.toLowerCase() + "Service.find" + entityName + "ById(" + entityName.toLowerCase() + "Id);\n"
+                        + "    public Optional<" + entityName + "> execute(" + idType + " " + entityPackage + "Id) {\n"
+                        + "        return " + entityPackage + "Service.find" + entityName + "ById(" + entityPackage + "Id);\n"
                         + "    }\n"
                         + "}\n";
                 break;
@@ -194,20 +197,20 @@ public class FileGenerator {
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.entity." + entityName + ";\n"
                         + "import com.sistema_gestion_ventas." + entityPackage + ".domain.service." + entityName + "Service;\n\n"
                         + "public class GetAll" + entityName + "UseCase {\n"
-                        + "    private final " + entityName + "Service " + entityName.toLowerCase() + "Service;\n\n"
-                        + "    public GetAll" + entityName + "UseCase(" + entityName + "Service " + entityName.toLowerCase() + "Service) {\n"
-                        + "        this." + entityName.toLowerCase() + "Service = " + entityName.toLowerCase() + "Service;\n"
+                        + "    private final " + entityName + "Service " + entityPackage + "Service;\n\n"
+                        + "    public GetAll" + entityName + "UseCase(" + entityName + "Service " + entityPackage + "Service) {\n"
+                        + "        this." + entityPackage + "Service = " + entityPackage + "Service;\n"
                         + "    }\n\n"
                         + "    public List<" + entityName + "> execute() {\n"
-                        + "        return " + entityName.toLowerCase() + "Service.getAll" + entityName + "();\n"
+                        + "        return " + entityPackage + "Service.getAll" + entityName + "();\n"
                         + "    }\n"
                         + "}\n";
                 break;
         }
         writeFile(filePath, content);
-    }
+    }    
     
-    private static void createRepositoryFile(String filePath, String entityPackage, String entityName, List<Map<String, String>> attributes) throws IOException {
+    private static void createRepositoryFile(String filePath, String entityPackage, String entityName, String idType , List<Map<String, String>> attributes) throws IOException {
         StringBuilder content = new StringBuilder();
         
         // Package declaration
@@ -251,8 +254,8 @@ public class FileGenerator {
     
         // CREATE method
         content.append("    @Override\n")
-               .append("    public void create").append(entityName).append("(").append(entityName).append(" ").append(entityName.toLowerCase()).append(") {\n")
-               .append("        String query = \"INSERT INTO ").append(entityName.toLowerCase()).append(" (");
+               .append("    public void create").append(entityName).append("(").append(entityName).append(" ").append(entityPackage).append(") {\n")
+               .append("        String query = \"INSERT INTO ").append(entityPackage).append(" (");
         
         // Column names for INSERT query
         for (int i = 0; i < attributes.size(); i++) {
@@ -277,10 +280,10 @@ public class FileGenerator {
             Map<String, String> attribute = attributes.get(i);
             if (attribute.get("type").equals("Date")) {
                 content.append("            ps.setDate(").append(i + 1).append(", new Date(")
-                       .append(entityName.toLowerCase()).append(".get").append(capitalize(attribute.get("name"))).append("().getTime()));\n");
+                       .append(entityPackage).append(".get").append(capitalize(attribute.get("name"))).append("().getTime()));\n");
             } else {
                 content.append("            ps.set").append(mapTypeToPreparedStatement(attribute.get("type")))
-                       .append("(").append(i + 1).append(", ").append(entityName.toLowerCase()).append(".get").append(capitalize(attribute.get("name"))).append("());\n");
+                       .append("(").append(i + 1).append(", ").append(entityPackage).append(".get").append(capitalize(attribute.get("name"))).append("());\n");
             }
         }
         content.append("            ps.executeUpdate();\n")
@@ -291,8 +294,8 @@ public class FileGenerator {
     
         // UPDATE method
         content.append("    @Override\n")
-               .append("    public void update").append(entityName).append("(").append(entityName).append(" ").append(entityName.toLowerCase()).append(") {\n")
-               .append("        String query = \"UPDATE ").append(entityName.toLowerCase()).append(" SET ");
+               .append("    public void update").append(entityName).append("(").append(entityName).append(" ").append(entityPackage).append(") {\n")
+               .append("        String query = \"UPDATE ").append(entityPackage).append(" SET ");
         for (int i = 1; i < attributes.size(); i++) {  // Skip the first attribute (usually ID)
             content.append(attributes.get(i).get("name")).append(" = ?");
             if (i < attributes.size() - 1) {
@@ -307,14 +310,14 @@ public class FileGenerator {
             Map<String, String> attribute = attributes.get(i);
             if (attribute.get("type").equals("Date")) {
                 content.append("            ps.setDate(").append(i).append(", new Date(")
-                       .append(entityName.toLowerCase()).append(".get").append(capitalize(attribute.get("name"))).append("().getTime()));\n");
+                       .append(entityPackage).append(".get").append(capitalize(attribute.get("name"))).append("().getTime()));\n");
             } else {
                 content.append("            ps.set").append(mapTypeToPreparedStatement(attribute.get("type")))
-                       .append("(").append(i).append(", ").append(entityName.toLowerCase()).append(".get").append(capitalize(attribute.get("name"))).append("());\n");
+                       .append("(").append(i).append(", ").append(entityPackage).append(".get").append(capitalize(attribute.get("name"))).append("());\n");
             }
         }
         content.append("            ps.set").append(mapTypeToPreparedStatement(attributes.get(0).get("type")))
-               .append("(").append(attributes.size()).append(", ").append(entityName.toLowerCase()).append(".get").append(capitalize(attributes.get(0).get("name"))).append("());\n")
+               .append("(").append(attributes.size()).append(", ").append(entityPackage).append(".get").append(capitalize(attributes.get(0).get("name"))).append("());\n")
                .append("            ps.executeUpdate();\n")
                .append("        } catch (SQLException e) {\n")
                .append("            e.printStackTrace();\n")
@@ -323,10 +326,10 @@ public class FileGenerator {
     
         // DELETE method
         content.append("    @Override\n")
-               .append("    public void delete").append(entityName).append("(String ").append(entityName.toLowerCase()).append("Id) {\n")
-               .append("        String query = \"DELETE FROM ").append(entityName.toLowerCase()).append(" WHERE ").append(attributes.get(0).get("name")).append(" = ?\";\n")
+               .append("    public void delete").append(entityName).append("(" + idType + " ").append(entityPackage).append("Id) {\n")
+               .append("        String query = \"DELETE FROM ").append(entityPackage).append(" WHERE ").append(attributes.get(0).get("name")).append(" = ?\";\n")
                .append("        try (PreparedStatement ps = connection.prepareStatement(query)) {\n")
-               .append("            ps.setString(1, ").append(entityName.toLowerCase()).append("Id);\n")
+               .append("            ps.set").append(mapTypeToPreparedStatement(idType)).append("(1, ").append(entityPackage).append("Id);\n")
                .append("            ps.executeUpdate();\n")
                .append("        } catch (SQLException e) {\n")
                .append("            e.printStackTrace();\n")
@@ -335,23 +338,23 @@ public class FileGenerator {
     
         // FIND BY ID method
         content.append("    @Override\n")
-               .append("    public Optional<").append(entityName).append("> find").append(entityName).append("ById(String ").append(entityName.toLowerCase()).append("Id) {\n")
-               .append("        String query = \"SELECT * FROM ").append(entityName.toLowerCase()).append(" WHERE ").append(attributes.get(0).get("name")).append(" = ?\";\n")
+               .append("    public Optional<").append(entityName).append("> find").append(entityName).append("ById(" + idType + " ").append(entityPackage).append("Id) {\n")
+               .append("        String query = \"SELECT * FROM ").append(entityPackage).append(" WHERE ").append(attributes.get(0).get("name")).append(" = ?\";\n")
                .append("        try (PreparedStatement ps = connection.prepareStatement(query)) {\n")
-               .append("            ps.setString(1, ").append(entityName.toLowerCase()).append("Id);\n")
+               .append("            ps.set").append(mapTypeToPreparedStatement(idType)).append("(1, ").append(entityPackage).append("Id);\n")
                .append("            try (ResultSet rs = ps.executeQuery()) {\n")
                .append("                if (rs.next()) {\n")
-               .append("                    ").append(entityName).append(" ").append(entityName.toLowerCase()).append(" = new ").append(entityName).append("();\n");
+               .append("                    ").append(entityName).append(" ").append(entityPackage).append(" = new ").append(entityName).append("();\n");
         for (Map<String, String> attribute : attributes) {
             if (attribute.get("type").equals("Date")) {
-                content.append("                    ").append(entityName.toLowerCase()).append(".set").append(capitalize(attribute.get("name")))
+                content.append("                    ").append(entityPackage).append(".set").append(capitalize(attribute.get("name")))
                        .append("(rs.getDate(\"").append(attribute.get("name")).append("\"));\n");
             } else {
-                content.append("                    ").append(entityName.toLowerCase()).append(".set").append(capitalize(attribute.get("name")))
+                content.append("                    ").append(entityPackage).append(".set").append(capitalize(attribute.get("name")))
                        .append("(rs.get").append(mapTypeToResultSet(attribute.get("type"))).append("(\"").append(attribute.get("name")).append("\"));\n");
             }
         }
-        content.append("                    return Optional.of(").append(entityName.toLowerCase()).append(");\n")
+        content.append("                    return Optional.of(").append(entityPackage).append(");\n")
                .append("                }\n")
                .append("            }\n")
                .append("        } catch (SQLException e) {\n")
@@ -363,27 +366,27 @@ public class FileGenerator {
         // GET ALL method
         content.append("    @Override\n")
                .append("    public List<").append(entityName).append("> getAll").append(entityName).append("() {\n")
-               .append("        List<").append(entityName).append("> ").append(entityName.toLowerCase()).append("List = new ArrayList<>();\n")
-               .append("        String query = \"SELECT * FROM ").append(entityName.toLowerCase()).append("\";\n")
+               .append("        List<").append(entityName).append("> ").append(entityPackage).append("List = new ArrayList<>();\n")
+               .append("        String query = \"SELECT * FROM ").append(entityPackage).append("\";\n")
                .append("        try (PreparedStatement ps = connection.prepareStatement(query);\n")
                .append("             ResultSet rs = ps.executeQuery()) {\n")
                .append("            while (rs.next()) {\n")
-               .append("                ").append(entityName).append(" ").append(entityName.toLowerCase()).append(" = new ").append(entityName).append("();\n");
+               .append("                ").append(entityName).append(" ").append(entityPackage).append(" = new ").append(entityName).append("();\n");
         for (Map<String, String> attribute : attributes) {
             if (attribute.get("type").equals("Date")) {
-                content.append("                ").append(entityName.toLowerCase()).append(".set").append(capitalize(attribute.get("name")))
+                content.append("                ").append(entityPackage).append(".set").append(capitalize(attribute.get("name")))
                        .append("(rs.getDate(\"").append(attribute.get("name")).append("\"));\n");
             } else {
-                content.append("                ").append(entityName.toLowerCase()).append(".set").append(capitalize(attribute.get("name")))
+                content.append("                ").append(entityPackage).append(".set").append(capitalize(attribute.get("name")))
                        .append("(rs.get").append(mapTypeToResultSet(attribute.get("type"))).append("(\"").append(attribute.get("name")).append("\"));\n");
             }
         }
-        content.append("                ").append(entityName.toLowerCase()).append("List.add(").append(entityName.toLowerCase()).append(");\n")
+        content.append("                ").append(entityPackage).append("List.add(").append(entityPackage).append(");\n")
                .append("            }\n")
                .append("        } catch (SQLException e) {\n")
                .append("            e.printStackTrace();\n")
                .append("        }\n")
-               .append("        return ").append(entityName.toLowerCase()).append("List;\n")
+               .append("        return ").append(entityPackage).append("List;\n")
                .append("    }\n");
     
         // End of class
@@ -442,14 +445,10 @@ public class FileGenerator {
     public static void main(String[] args) {
         try {
             List<Map<String, String>> attributes = List.of(
-                    Map.of("name", "detallePedidoId", "type", "int"),
-                    Map.of("name", "pedidoId", "type", "int"),
-                    Map.of("name", "productoId", "type", "int"),
-                    Map.of("name", "cantidad", "type", "int"),
-                    Map.of("name", "precioUnitario", "type", "double"),
-                    Map.of("name", "subTotal", "type", "double")
+                    Map.of("name", "tipoPersonaId", "type", "int"),
+                    Map.of("name", "descripcion", "type", "String")
             );
-            generateFilesForEntity("DetallePedido", "detallePedido", attributes);
+            generateFilesForEntity("TipoPersona", "tipoPersona", attributes);
         } catch (IOException e) {
             e.printStackTrace();
         }

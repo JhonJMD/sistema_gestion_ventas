@@ -9,7 +9,7 @@ public class DeleteTipoMovimientoUseCase {
         this.tipomovimientoService = tipomovimientoService;
     }
 
-    public void execute(String tipomovimientoId) {
-        tipomovimientoService.deleteTipoMovimiento(tipomovimientoId);
+    public void execute(int tipoMovimientoId) {
+        tipomovimientoService.deleteTipoMovimiento(tipoMovimientoId);
     }
 }

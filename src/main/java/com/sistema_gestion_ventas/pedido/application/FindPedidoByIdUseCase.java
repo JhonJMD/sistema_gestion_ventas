@@ -11,7 +11,7 @@ public class FindPedidoByIdUseCase {
         this.pedidoService = pedidoService;
     }
 
-    public Optional<Pedido> execute(String pedidoId) {
+    public Optional<Pedido> execute(int pedidoId) {
         return pedidoService.findPedidoById(pedidoId);
     }
 }

@@ -9,7 +9,7 @@ public class DeleteInventarioUseCase {
         this.inventarioService = inventarioService;
     }
 
-    public void execute(String inventarioId) {
+    public void execute(int inventarioId) {
         inventarioService.deleteInventario(inventarioId);
     }
 }

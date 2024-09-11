@@ -56,10 +56,10 @@ public class CategoriaProductoRepository implements CategoriaProductoService {
     }
 
     @Override
-    public void deleteCategoriaProducto(int categoriaproductoId) {
+    public void deleteCategoriaProducto(int categoriaProductoId) {
         String query = "DELETE FROM categoriaproducto WHERE categoriaProductoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, categoriaproductoId);
+            ps.setInt(1, categoriaProductoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,10 +67,10 @@ public class CategoriaProductoRepository implements CategoriaProductoService {
     }
 
     @Override
-    public Optional<CategoriaProducto> findCategoriaProductoById(int categoriaproductoId) {
+    public Optional<CategoriaProducto> findCategoriaProductoById(int categoriaProductoId) {
         String query = "SELECT * FROM categoriaproducto WHERE categoriaProductoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, categoriaproductoId);
+            ps.setInt(1, categoriaProductoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     CategoriaProducto categoriaproducto = new CategoriaProducto();

@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.tipo_documento.domain.entity.TipoDocumento;
 public interface TipoDocumentoService {
     void createTipoDocumento(TipoDocumento tipodocumento);
     void updateTipoDocumento(TipoDocumento tipodocumento);
-    void deleteTipoDocumento(String tipodocumentoId);
-    Optional<TipoDocumento> findTipoDocumentoById(String tipodocumentoId);
+    void deleteTipoDocumento(int tipoDocumentoId);
+    Optional<TipoDocumento> findTipoDocumentoById(int tipoDocumentoId);
     List<TipoDocumento> getAllTipoDocumento();
 }

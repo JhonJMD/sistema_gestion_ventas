@@ -12,7 +12,7 @@ public class FindTipoMovimientoByIdUseCase {
         this.tipomovimientoService = tipomovimientoService;
     }
 
-    public Optional<TipoMovimiento> execute(String tipomovimientoId) {
-        return tipomovimientoService.findTipoMovimientoById(tipomovimientoId);
+    public Optional<TipoMovimiento> execute(int tipoMovimientoId) {
+        return tipomovimientoService.findTipoMovimientoById(tipoMovimientoId);
     }
 }

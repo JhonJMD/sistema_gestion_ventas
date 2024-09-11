@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.tipo_movimiento.domain.entity.TipoMovimiento;
 public interface TipoMovimientoService {
     void createTipoMovimiento(TipoMovimiento tipomovimiento);
     void updateTipoMovimiento(TipoMovimiento tipomovimiento);
-    void deleteTipoMovimiento(String tipomovimientoId);
-    Optional<TipoMovimiento> findTipoMovimientoById(String tipomovimientoId);
+    void deleteTipoMovimiento(int tipoMovimientoId);
+    Optional<TipoMovimiento> findTipoMovimientoById(int tipoMovimientoId);
     List<TipoMovimiento> getAllTipoMovimiento();
 }

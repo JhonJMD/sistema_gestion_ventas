@@ -9,7 +9,7 @@ public class DeleteTipoDocumentoUseCase {
         this.tipodocumentoService = tipodocumentoService;
     }
 
-    public void execute(String tipodocumentoId) {
-        tipodocumentoService.deleteTipoDocumento(tipodocumentoId);
+    public void execute(int tipoDocumentoId) {
+        tipodocumentoService.deleteTipoDocumento(tipoDocumentoId);
     }
 }

@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.producto.domain.entity.Producto;
 public interface ProductoService {
     void createProducto(Producto producto);
     void updateProducto(Producto producto);
-    void deleteProducto(String productoId);
-    Optional<Producto> findProductoById(String productoId);
+    void deleteProducto(int productoId);
+    Optional<Producto> findProductoById(int productoId);
     List<Producto> getAllProducto();
 }

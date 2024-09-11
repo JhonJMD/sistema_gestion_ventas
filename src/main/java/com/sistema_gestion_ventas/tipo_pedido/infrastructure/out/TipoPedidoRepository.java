@@ -54,10 +54,10 @@ public class TipoPedidoRepository implements TipoPedidoService {
     }
 
     @Override
-    public void deleteTipoPedido(String tipopedidoId) {
+    public void deleteTipoPedido(int tipoPedidoId) {
         String query = "DELETE FROM tipopedido WHERE tipoPedidoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipopedidoId);
+            ps.setInt(1, tipoPedidoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class TipoPedidoRepository implements TipoPedidoService {
     }
 
     @Override
-    public Optional<TipoPedido> findTipoPedidoById(String tipopedidoId) {
+    public Optional<TipoPedido> findTipoPedidoById(int tipoPedidoId) {
         String query = "SELECT * FROM tipopedido WHERE tipoPedidoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, tipopedidoId);
+            ps.setInt(1, tipoPedidoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     TipoPedido tipopedido = new TipoPedido();

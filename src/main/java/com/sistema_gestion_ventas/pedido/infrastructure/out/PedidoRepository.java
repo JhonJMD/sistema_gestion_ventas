@@ -67,10 +67,10 @@ public class PedidoRepository implements PedidoService {
     }
 
     @Override
-    public void deletePedido(String pedidoId) {
+    public void deletePedido(int pedidoId) {
         String query = "DELETE FROM pedido WHERE pedidoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, pedidoId);
+            ps.setInt(1, pedidoId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,10 +78,10 @@ public class PedidoRepository implements PedidoService {
     }
 
     @Override
-    public Optional<Pedido> findPedidoById(String pedidoId) {
+    public Optional<Pedido> findPedidoById(int pedidoId) {
         String query = "SELECT * FROM pedido WHERE pedidoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, pedidoId);
+            ps.setInt(1, pedidoId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Pedido pedido = new Pedido();

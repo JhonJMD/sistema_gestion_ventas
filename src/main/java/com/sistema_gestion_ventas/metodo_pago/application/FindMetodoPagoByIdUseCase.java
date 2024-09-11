@@ -12,7 +12,7 @@ public class FindMetodoPagoByIdUseCase {
         this.metodopagoService = metodopagoService;
     }
 
-    public Optional<MetodoPago> execute(String metodopagoId) {
-        return metodopagoService.findMetodoPagoById(metodopagoId);
+    public Optional<MetodoPago> execute(int metodoPagoId) {
+        return metodopagoService.findMetodoPagoById(metodoPagoId);
     }
 }

@@ -12,7 +12,7 @@ public class FindTipoDocumentoByIdUseCase {
         this.tipodocumentoService = tipodocumentoService;
     }
 
-    public Optional<TipoDocumento> execute(String tipodocumentoId) {
-        return tipodocumentoService.findTipoDocumentoById(tipodocumentoId);
+    public Optional<TipoDocumento> execute(int tipoDocumentoId) {
+        return tipodocumentoService.findTipoDocumentoById(tipoDocumentoId);
     }
 }

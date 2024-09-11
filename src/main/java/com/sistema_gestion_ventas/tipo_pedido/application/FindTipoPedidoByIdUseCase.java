@@ -12,7 +12,7 @@ public class FindTipoPedidoByIdUseCase {
         this.tipopedidoService = tipopedidoService;
     }
 
-    public Optional<TipoPedido> execute(String tipopedidoId) {
-        return tipopedidoService.findTipoPedidoById(tipopedidoId);
+    public Optional<TipoPedido> execute(int tipoPedidoId) {
+        return tipopedidoService.findTipoPedidoById(tipoPedidoId);
     }
 }

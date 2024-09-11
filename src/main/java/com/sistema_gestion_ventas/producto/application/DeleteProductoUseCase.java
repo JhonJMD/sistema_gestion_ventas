@@ -9,7 +9,7 @@ public class DeleteProductoUseCase {
         this.productoService = productoService;
     }
 
-    public void execute(String productoId) {
+    public void execute(int productoId) {
         productoService.deleteProducto(productoId);
     }
 }

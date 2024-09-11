@@ -8,7 +8,7 @@ import com.sistema_gestion_ventas.metodo_pago.domain.entity.MetodoPago;
 public interface MetodoPagoService {
     void createMetodoPago(MetodoPago metodopago);
     void updateMetodoPago(MetodoPago metodopago);
-    void deleteMetodoPago(String metodopagoId);
-    Optional<MetodoPago> findMetodoPagoById(String metodopagoId);
+    void deleteMetodoPago(int metodoPagoId);
+    Optional<MetodoPago> findMetodoPagoById(int metodoPagoId);
     List<MetodoPago> getAllMetodoPago();
 }
