@@ -2,11 +2,11 @@ package com.sistema_gestion_ventas.tipo_telefono.domain.entity;
 
 public class TipoTelefono {
     private int tipoTelefonoId;
-    private int descripcion;
+    private String descripcion;
 
     public TipoTelefono() {}
 
-    public TipoTelefono(int tipoTelefonoId, int descripcion) {
+    public TipoTelefono(int tipoTelefonoId, String descripcion) {
         this.tipoTelefonoId = tipoTelefonoId;
         this.descripcion = descripcion;
     }
@@ -19,11 +19,11 @@ public class TipoTelefono {
         this.tipoTelefonoId = tipoTelefonoId;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 

@@ -336,4 +336,124 @@ CREATE TABLE historialMovimientos (
     CONSTRAINT fk_id_tipo_movimiento_historial FOREIGN KEY (tipoMovimientoId) REFERENCES tipoMovimiento(tipoMovimientoId)
 );
 
+-- Insertar Países
+INSERT INTO pais (nombre) VALUES ('Argentina');
+INSERT INTO pais (nombre) VALUES ('Chile');
+
+-- Insertar Ciudades
+INSERT INTO ciudad (nombre, paisId) VALUES ('Buenos Aires', 1);
+INSERT INTO ciudad (nombre, paisId) VALUES ('Santiago', 2);
+
+-- Insertar Direcciones
+INSERT INTO direccion (direccionCompleta, ciudadId) VALUES ('Av. Corrientes 1234', 1);
+INSERT INTO direccion (direccionCompleta, ciudadId) VALUES ('Av. Libertador 5678', 2);
+
+-- Insertar Tipo Documento
+INSERT INTO tipoDocumento (nombre) VALUES ('DNI');
+INSERT INTO tipoDocumento (nombre) VALUES ('Pasaporte');
+
+-- Insertar Tipo Persona
+INSERT INTO tipoPersona (descripcion) VALUES ('Natural');
+INSERT INTO tipoPersona (descripcion) VALUES ('Jurídica');
+
+-- Insertar Tipo Teléfono
+INSERT INTO tipoTelefono (descripcion) VALUES ('Celular');
+INSERT INTO tipoTelefono (descripcion) VALUES ('Fijo');
+
+-- Insertar Teléfonos
+INSERT INTO telefono (tipoTelefonoId, telefono) VALUES (1, '123456789');
+INSERT INTO telefono (tipoTelefonoId, telefono) VALUES (2, '987654321');
+
+-- Insertar Empresas
+INSERT INTO empresa (nombre, direccionId, representanteLegal) VALUES ('Tech Solutions S.A.', 1, 'Juan Pérez');
+INSERT INTO empresa (nombre, direccionId, representanteLegal) VALUES ('Innovatech Ltda.', 2, 'Ana Gómez');
+
+-- Insertar Sucursales
+INSERT INTO sucursal (direccionId, descripcion) VALUES (1, 'Sucursal Central');
+INSERT INTO sucursal (direccionId, descripcion) VALUES (2, 'Sucursal Norte');
+
+-- Insertar Tipo Movimiento
+INSERT INTO tipoMovimiento (descripcion) VALUES ('Entrada');
+INSERT INTO tipoMovimiento (descripcion) VALUES ('Salida');
+
+-- Insertar Categorías de Producto
+INSERT INTO categoriaProducto (nombre, descripcion) VALUES ('Electrónica', 'Productos electrónicos');
+INSERT INTO categoriaProducto (nombre, descripcion) VALUES ('Ropa', 'Prendas de vestir');
+
+-- Insertar Métodos de Pago
+INSERT INTO metodoPago (descripcion) VALUES ('Tarjeta de Crédito');
+INSERT INTO metodoPago (descripcion) VALUES ('Efectivo');
+
+-- Insertar Estados
+INSERT INTO estado (descripcion) VALUES ('Pendiente');
+INSERT INTO estado (descripcion) VALUES ('Aprobado');
+
+-- Insertar Proveedores
+INSERT INTO proveedor (proveedorId, tipoDocumentoId, tipoPersonaId, nombre, direccionId, telefonoId, email) VALUES ('P001', 1, 1, 'Proveedor A', 1, 1, 'contacto@proveedora.com');
+INSERT INTO proveedor (proveedorId, tipoDocumentoId, tipoPersonaId, nombre, direccionId, telefonoId, email) VALUES ('P002', 2, 2, 'Proveedor B', 2, 2, 'contacto@proveedorb.com');
+
+-- Insertar Tipos de Pedido
+INSERT INTO tipoPedido (descripcion) VALUES ('Compra');
+INSERT INTO tipoPedido (descripcion) VALUES ('Venta');
+
+-- Insertar Clientes
+INSERT INTO cliente (clienteId, tipoDocumentoId, tipoPersonaId, nombre, apellido, direccionId, telefonoId, email, totalGastado, comprasRealizadas) VALUES ('C001', 1, 1, 'Carlos', 'Fernández', 1, 1, 'carlos@cliente.com', 1500.00, 3);
+INSERT INTO cliente (clienteId, tipoDocumentoId, tipoPersonaId, nombre, apellido, direccionId, telefonoId, email, totalGastado, comprasRealizadas) VALUES ('C002', 2, 2, 'Lucía', 'Mendoza', 2, 2, 'lucia@cliente.com', 2500.00, 5);
+
+-- Insertar Empleados
+INSERT INTO empleado (empleadoId, tipoDocumentoId, nombre, apellido, direccionId, sucursalId, email) VALUES ('E001', 1, 'Roberto', 'García', 1, 1, 'roberto@empresa.com');
+INSERT INTO empleado (empleadoId, tipoDocumentoId, nombre, apellido, direccionId, sucursalId, email) VALUES ('E002', 2, 'María', 'Pérez', 2, 2, 'maria@empresa.com');
+
+-- Insertar Usuarios
+INSERT INTO usuario (empleadoId, username, passwordHash, rol) VALUES ('E001', 'admin', '12345', 'ADMIN_GENERAL');
+INSERT INTO usuario (empleadoId, username, passwordHash, rol) VALUES ('E002', 'user1', '12345', 'EMPLEADO');
+
+-- Insertar Pedidos
+INSERT INTO pedido (tipoPedidoId, clienteId, fechaPedido, estadoId, totalEstimado, fechaConfirmacion, usuarioId) VALUES (1, 'C001', '2024-09-01', 1, 1000.00, '2024-09-02', 1);
+INSERT INTO pedido (tipoPedidoId, clienteId, fechaPedido, estadoId, totalEstimado, fechaConfirmacion, usuarioId) VALUES (2, 'C002', '2024-09-03', 2, 2000.00, '2024-09-04', 2);
+
+-- Insertar Productos
+INSERT INTO producto (codigoBarras, nombre, descripcion, precio, categoriaProductoId) VALUES ('1234567890123', 'Laptop', 'Laptop de alta gama', 1200.00, 1);
+INSERT INTO producto (codigoBarras, nombre, descripcion, precio, categoriaProductoId) VALUES ('0987654321098', 'Camisa', 'Camisa de algodón', 30.00, 2);
+
+-- Insertar Detalles de Pedido
+INSERT INTO detallePedido (pedidoId, productoId, cantidad, precioUnitario, subtotal) VALUES (1, 1, 1, 1200.00, 1200.00);
+INSERT INTO detallePedido (pedidoId, productoId, cantidad, precioUnitario, subtotal) VALUES (2, 2, 2, 30.00, 60.00);
+
+-- Insertar Proveedores de Productos
+INSERT INTO proveedorProducto (proveedorId, productoId, precioCompra, tiempoEntrega, cantidadMinimaPedido, descuentoVolumen, moneda, condicionesPago, fechaUltimaCompra, calificacionProveedor) VALUES ('P001', 1, 1150.00, 7, 10, 5.00, 'USD', '30 días', '2024-08-20', 4.50);
+INSERT INTO proveedorProducto (proveedorId, productoId, precioCompra, tiempoEntrega, cantidadMinimaPedido, descuentoVolumen, moneda, condicionesPago, fechaUltimaCompra, calificacionProveedor) VALUES ('P002', 2, 25.00, 3, 5, 10.00, 'USD', '15 días', '2024-08-15', 4.00);
+
+-- Insertar Inventarios
+INSERT INTO inventario (productoId, sucursalId, stock) VALUES (1, 1, 50);
+INSERT INTO inventario (productoId, sucursalId, stock) VALUES (2, 2, 100);
+
+-- Insertar Compras
+INSERT INTO compra (pedidoId, fechaCompra, estadoId, totalSinDescuento, empleadoId) VALUES (1, '2024-09-05', 1, 1000.00, 'E001');
+INSERT INTO compra (pedidoId, fechaCompra, estadoId, totalSinDescuento, empleadoId) VALUES (2, '2024-09-06', 2, 2000.00, 'E002');
+
+-- Insertar Detalles de Compra
+INSERT INTO detalleCompra (compraId, productoId, cantidad, precioUnitario, subtotal) VALUES (1, 1, 1, 1150.00, 1150.00);
+INSERT INTO detalleCompra (compraId, productoId, cantidad, precioUnitario, subtotal) VALUES (2, 2, 2, 25.00, 50.00);
+
+-- Insertar Ventas
+INSERT INTO venta (pedidoId, fechaVenta, totalSinDescuento, clienteId, estadoId, empleadoId) VALUES (1, '2024-09-07', 1200.00, 'C001', 1, 'E001');
+INSERT INTO venta (pedidoId, fechaVenta, totalSinDescuento, clienteId, estadoId, empleadoId) VALUES (2, '2024-09-08', 60.00, 'C002', 2, 'E002');
+
+-- Insertar Detalles de Venta
+INSERT INTO detalleVenta (ventaId, productoId, cantidad, precioUnitario, subtotal) VALUES (1, 1, 1, 1200.00, 1200.00);
+INSERT INTO detalleVenta (ventaId, productoId, cantidad, precioUnitario, subtotal) VALUES (2, 2, 2, 30.00, 60.00);
+
+-- Insertar Facturas
+INSERT INTO factura (ventaId, fechaFactura, metodoPagoId, descuentoPorcentaje) VALUES (1, '2024-09-08', 1, 10.00);
+INSERT INTO factura (ventaId, fechaFactura, metodoPagoId, descuentoPorcentaje) VALUES (2, '2024-09-09', 2, 5.00);
+
+-- Insertar Devoluciones
+INSERT INTO devolucion (fechaDevolucion, motivo, estadoId, facturaId) VALUES ('2024-09-10', 'Producto defectuoso', 2, 1);
+
+-- Insertar Historial de Movimientos
+INSERT INTO historialMovimientos (productoId, sucursalId, tipoMovimientoId, cantidad, fechaMovimiento) VALUES (1, 1, 1, 50, '2024-09-01');
+INSERT INTO historialMovimientos (productoId, sucursalId, tipoMovimientoId, cantidad, fechaMovimiento) VALUES (2, 2, 2, 100, '2024-09-01');
+
+
 

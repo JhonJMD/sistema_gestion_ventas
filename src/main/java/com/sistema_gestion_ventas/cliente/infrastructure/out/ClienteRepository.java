@@ -33,7 +33,7 @@ public class ClienteRepository implements ClienteService {
     public void createCliente(Cliente cliente) {
         String query = "INSERT INTO cliente (clienteId, tipoDocumentoId, tipoPersonaId, nombre, apellido, direccionId, telefonoId, email, totalGastado, comprasRealizadas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, cliente.getClienteId());
+            ps.setString(1, cliente.getClienteId());
             ps.setInt(2, cliente.getTipoDocumentoId());
             ps.setInt(3, cliente.getTipoPersonaId());
             ps.setString(4, cliente.getNombre());
@@ -62,7 +62,7 @@ public class ClienteRepository implements ClienteService {
             ps.setString(7, cliente.getEmail());
             ps.setDouble(8, cliente.getTotalGastado());
             ps.setInt(9, cliente.getComprasRealizadas());
-            ps.setInt(10, cliente.getClienteId());
+            ps.setString(10, cliente.getClienteId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class ClienteRepository implements ClienteService {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Cliente cliente = new Cliente();
-                    cliente.setClienteId(rs.getInt("clienteId"));
+                    cliente.setClienteId(rs.getString("clienteId"));
                     cliente.setTipoDocumentoId(rs.getInt("tipoDocumentoId"));
                     cliente.setTipoPersonaId(rs.getInt("tipoPersonaId"));
                     cliente.setNombre(rs.getString("nombre"));
@@ -112,10 +112,10 @@ public class ClienteRepository implements ClienteService {
         List<Cliente> clienteList = new ArrayList<>();
         String query = "SELECT * FROM cliente";
         try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setClienteId(rs.getInt("clienteId"));
+                cliente.setClienteId(rs.getString("clienteId"));
                 cliente.setTipoDocumentoId(rs.getInt("tipoDocumentoId"));
                 cliente.setTipoPersonaId(rs.getInt("tipoPersonaId"));
                 cliente.setNombre(rs.getString("nombre"));

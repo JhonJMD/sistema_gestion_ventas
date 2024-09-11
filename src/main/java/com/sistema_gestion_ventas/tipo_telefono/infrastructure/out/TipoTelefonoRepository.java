@@ -34,7 +34,7 @@ public class TipoTelefonoRepository implements TipoTelefonoService {
         String query = "INSERT INTO tipoTelefono (tipoTelefonoId, descripcion) VALUES (?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, tipoTelefono.getTipoTelefonoId());
-            ps.setInt(2, tipoTelefono.getDescripcion());
+            ps.setString(2, tipoTelefono.getDescripcion());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class TipoTelefonoRepository implements TipoTelefonoService {
     public void updateTipoTelefono(TipoTelefono tipoTelefono) {
         String query = "UPDATE tipoTelefono SET descripcion = ? WHERE tipoTelefonoId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, tipoTelefono.getDescripcion());
+            ps.setString(1, tipoTelefono.getDescripcion());
             ps.setInt(2, tipoTelefono.getTipoTelefonoId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class TipoTelefonoRepository implements TipoTelefonoService {
                 if (rs.next()) {
                     TipoTelefono tipoTelefono = new TipoTelefono();
                     tipoTelefono.setTipoTelefonoId(rs.getInt("tipoTelefonoId"));
-                    tipoTelefono.setDescripcion(rs.getInt("descripcion"));
+                    tipoTelefono.setDescripcion(rs.getString("descripcion"));
                     return Optional.of(tipoTelefono);
                 }
             }
@@ -92,7 +92,7 @@ public class TipoTelefonoRepository implements TipoTelefonoService {
             while (rs.next()) {
                 TipoTelefono tipoTelefono = new TipoTelefono();
                 tipoTelefono.setTipoTelefonoId(rs.getInt("tipoTelefonoId"));
-                tipoTelefono.setDescripcion(rs.getInt("descripcion"));
+                tipoTelefono.setDescripcion(rs.getString("descripcion"));
                 tipoTelefonoList.add(tipoTelefono);
             }
         } catch (SQLException e) {

@@ -1,7 +1,7 @@
 package com.sistema_gestion_ventas.cliente.domain.entity;
 
 public class Cliente {
-    private int clienteId;
+    private String clienteId;
     private int tipoDocumentoId;
     private int tipoPersonaId;
     private String nombre;
@@ -14,7 +14,7 @@ public class Cliente {
 
     public Cliente() {}
 
-    public Cliente(int clienteId, int tipoDocumentoId, int tipoPersonaId, String nombre, String apellido, int direccionId, int telefonoId, String email, double totalGastado, int comprasRealizadas) {
+    public Cliente(String clienteId, int tipoDocumentoId, int tipoPersonaId, String nombre, String apellido, int direccionId, int telefonoId, String email, double totalGastado, int comprasRealizadas) {
         this.clienteId = clienteId;
         this.tipoDocumentoId = tipoDocumentoId;
         this.tipoPersonaId = tipoPersonaId;
@@ -27,11 +27,11 @@ public class Cliente {
         this.comprasRealizadas = comprasRealizadas;
     }
 
-    public int getClienteId() {
+    public String getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(int clienteId) {
+    public void setClienteId(String clienteId) {
         this.clienteId = clienteId;
     }
 

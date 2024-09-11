@@ -91,7 +91,7 @@ public class CiudadRepository implements CiudadService {
         List<Ciudad> ciudadList = new ArrayList<>();
         String query = "SELECT * FROM ciudad";
         try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Ciudad ciudad = new Ciudad();
                 ciudad.setCiudadId(rs.getInt("ciudadId"));
